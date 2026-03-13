@@ -1,0 +1,349 @@
+// RWD 響應式斷點
+// 同時支援 viewport（一般頁面）與 container（如 .sectionsContainerMobile 手機預覽）
+// 使用 container-name: mobile-preview 的父層會觸發對應的 container query
+
+// XL: 1280px 以下
+@mixin rwd-xl {
+  @media screen and (max-width: 1280px) {
+    @content;
+  }
+
+  @container mobile-preview (max-width: 1280px) {
+    @content;
+  }
+}
+
+// LG: 1024px 以下
+@mixin rwd-lg {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+
+  @container mobile-preview (max-width: 1024px) {
+    @content;
+  }
+}
+
+// MD: 768px 以下
+@mixin rwd-md {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+
+  @container mobile-preview (max-width: 768px) {
+    @content;
+  }
+}
+
+// SM: 430px 以下
+@mixin rwd-sm {
+  @media screen and (max-width: 430px) {
+    @content;
+  }
+
+  @container mobile-preview (max-width: 430px) {
+    @content;
+  }
+}
+
+// SS: 320px 以下
+@mixin rwd-ss {
+  @media screen and (max-width: 320px) {
+    @content;
+  }
+
+  @container mobile-preview (max-width: 320px) {
+    @content;
+  }
+}
+
+// XS: 319px 以下
+@mixin rwd-xs {
+  @media screen and (max-width: 319px) {
+    @content;
+  }
+
+  @container mobile-preview (max-width: 319px) {
+    @content;
+  }
+}
+
+
+// 玻璃擬態
+@mixin glass-effect {
+  background: $glass-bg;
+  backdrop-filter: blur(10px);
+  border: 1px solid $glass-border;
+}
+
+
+/**
+ * Section 共用樣式（mixin）
+ * 目標：集中管理各 section 常見的 .container/.header/.title/.subtitle
+ */
+
+@mixin section-base {
+  width: 100%;
+  padding: 100px 32px;
+
+  @include rwd-xl {
+    padding: 80px 32px;
+  }
+
+  @include rwd-lg {
+    padding: 60px 32px;
+  }
+  @include rwd-md {
+    padding: 30px 24px;
+  }
+}
+
+@mixin section-container($max-width: 1280px) {
+  max-width: $max-width;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+
+
+  @include rwd-xl {
+    padding: 0 24px;
+  }
+
+  @include rwd-lg {
+    padding: 0 16px;
+  }
+  @include rwd-md {
+    padding: 0 8px;
+  }
+
+}
+
+@mixin section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+@mixin section-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: $text-main;
+
+
+  @include rwd-md {
+    font-size: 28px;
+  }
+}
+
+
+@mixin section-subtitle {
+  font-size: 20px;
+  color: $text-muted;
+  line-height: 1.6;
+  @include rwd-md {
+    font-size: 18px;
+  }
+}
+
+@mixin section-content {
+  font-size: 18px;
+  line-height: 1.8;
+  color: $text-main;
+  margin-bottom: 32px;
+
+  @include rwd-md {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  // Rich text 內容樣式
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $text-main;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    line-height: 1.3;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h1 {
+    font-size: 40px;
+    @include rwd-lg {
+      font-size: 32px;
+    }
+  }
+
+  h2 {
+    font-size: 32px;
+    @include rwd-lg {
+      font-size: 28px;
+    }
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  h4 {
+    font-size: 20px;
+  }
+
+  p {
+    line-height: 2.2;
+  }
+
+  ul,
+  ol {
+    margin-bottom: 16px;
+    padding-left: 24px;
+  }
+
+  li {
+    line-height: 2.2;
+  }
+
+  a {
+    color: $accent-orange;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: darken($accent-orange, 10%);
+      text-decoration: underline;
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    margin: 24px 0;
+  }
+
+  svg {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    display: inline-block;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  // 表格樣式
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    overflow-x: auto;
+    display: block;
+
+    @include rwd-md {
+      display: table;
+    }
+  }
+
+  thead {
+    background-color: $bg-lightgray;
+  }
+
+  th,
+  td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  th {
+    font-weight: 600;
+    color: $text-main;
+  }
+
+  td {
+    color: $text-main;
+  }
+
+  // 水平線樣式
+  hr {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 32px 0;
+  }
+}
+
+@mixin section-buttonLink {
+  display: inline-block;
+  text-decoration: none;
+}
+
+@mixin section-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background-color: $accent-orange;
+  color: $bg-color;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px #ededed33;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+
+
+  &:after {
+    content: "";
+    position: absolute;
+    transition: 0.3s;
+    width: 0;
+    left: -10%;
+    bottom: 0;
+    background: $text-main;
+    height: 120%;
+    transform: skewX(15deg);
+    z-index: -1;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+
+    &:after {
+      width: 120%;
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @include rwd-md {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+@mixin section-buttonIcon {
+  transition: transform 0.3s;
+}
+
+@mixin section-buttonIconHover {
+  transform: translateX(4px);
+}
