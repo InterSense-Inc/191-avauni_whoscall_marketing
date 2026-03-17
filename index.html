@@ -24,7 +24,7 @@
           <ul class="nav-list">
             <li><a href="#prizes">獎品詳情</a></li>
             <li><a href="#steps">抽獎步驟</a></li>
-            <li><a href="#raffle-link">抽獎連結</a></li>
+            <li><a href="#CTA-section">抽獎連結</a></li>
             <li><a href="#">下載 Whoscall</a></li>
           </ul>
         </nav>
@@ -39,57 +39,195 @@
               <h2>Whoscall 進階版</h2>
             </div>
             <div class="qr-code-area">
-              <span>一掃即抽</span>
+              <span class="qr-code-badge">一掃即抽</span>
               <div class="qr-code-wrapper">
                 <img src="images/qr-code.png" alt="qr-code" />
               </div>
-              <ul>
-                <li>
-                  <img
-                    src="images/icon-1.png"
-                    alt="短訊網址連結掃描icon"
-                  />短訊網址連結掃描
-                </li>
-                <li>
-                  <img src="images/icon-2.png" alt="移除廣告icon" />移除廣告
-                </li>
-                <li>
-                  <img
-                    src="images/icon-3.png"
-                    alt="自動更新號碼資料庫icon"
-                  />自動更新號碼資料庫
-                </li>
+              <ul id="features-list">
+                <!-- 由 JS 依 Features 動態渲染 -->
               </ul>
             </div>
-            <div class="download-button-group">
-              <a href="#" class="download-link">
-                <span class="link-icon">
-                  <i class="fa-brands fa-google-play"></i>
-                </span>
-                <span class="link-text-group">
-                  <span class="link-text link-text-top">Get it on</span>
-                  <span class="link-text link-text-bottom">Google Play</span>
-                </span>
-              </a>
+            <div class="download-button-group" id="download-button-group">
+              <!-- 按鈕由 JS 依 DownloadLinks 動態渲染 -->
             </div>
           </div>
         </div>
       </section>
       <section id="prizes">
-        <div class="prizes-content">
-          <div class="prizes-item">
-            <div class="image-wrapper">
-              <img src="images/prize-1.png" alt="prize-1" />
-            </div>
-            <div class="prizes-item-content">
-              <h3>進階版一個月</h3>
-              <p>價值<span>xxx</span>元</p>
-            </div>
-          </div>
+        <div class="section-header">
+          <h2>獎品詳情</h2>
+        </div>
+        </div>
+        <div id="prizes-content">
+          <!-- 由 JS 依 Prizes 動態渲染 -->
         </div>
       </section>
-      <section id="about"></section>
-      <section id="raffle-link"></section>
+      <section id="steps">
+        <div class="section-header">
+          <h2>抽獎步驟</h2>
+        </div>
+        <div id="steps-content"></div>
+      </section>
+      <section id="CTA-section">
+        <div id="CTA-content">
+          <div class="CTA-content-wrapper">
+          <div class="CTA-content-text">
+            <h2>前往參加抽獎<br>獲取Whoscall進階版!</h2>
+            <p>點擊以下連結進入抽獎頁面</p>
+          </div>
+          <div class="CTA-content-button">
+            <a href="#" class="CTA-button">抽獎連結</a>
+          </div>
+        </div>
+        </div>
+      </section>
     </main>
   </body>
+  <script>
+    /* HERO下載連結按鈕 */
+    const DownloadLinks = [
+      {
+        icon: "fa-brands fa-google-play",
+        platform: "Google Play",
+        href: "https://play.google.com/store/apps/details?id=gogolook.callgogolook2&hl=zh_TW",
+      },
+      {
+        icon: "fa-brands fa-apple",
+        platform: "App Store",
+        href: "https://apps.apple.com/tw/app/whoscall-%E8%B1%A1%E5%8D%A1%E4%BE%86/id929968679",
+      },
+    ];
+
+    // 依 DownloadLinks 在 download-button-group 內渲染下載按鈕
+    const buttonGroup = document.getElementById("download-button-group");
+    if (buttonGroup) {
+      DownloadLinks.forEach((link) => {
+        const a = document.createElement("a");
+        a.href = link.href;
+        a.className = "download-link";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.innerHTML = `
+          <span class="link-icon">
+            <i class="${link.icon}"></i>
+          </span>
+          <span class="link-text-group">
+            <span class="link-text link-text-top">Get it on</span>
+            <span class="link-text link-text-bottom">${link.platform}</span>
+          </span>
+        `;
+        buttonGroup.appendChild(a);
+      });
+    }
+    /*HERO特色 */
+    const Features = [
+      {
+        icon: "images/icon-1.png",
+        text: "短訊網址連結掃描",
+      },
+      {
+        icon: "images/icon-2.png",
+        text: "移除廣告",
+      },
+      {
+        icon: "images/icon-3.png",
+        text: "自動更新號碼資料庫",
+      },
+    ];
+    const featuresList = document.getElementById("features-list");
+    if (featuresList) {
+      Features.forEach((feature) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <div class="icon-wrapper">
+            <img src="${feature.icon}" alt="${feature.text}" />
+          </div>
+          <div class="feature-text-wrapper">
+          <span>${feature.text}</span>
+          </div>
+        `;
+        featuresList.appendChild(li);
+      });
+    }
+
+    /* 獎品詳情 */
+    const Prizes = [
+      {
+        image: "images/prize-1.png",
+        title: "一個月",
+        price: "xxx",
+      },
+      {
+        image: "images/prize-2.png",
+        title: "三個月",
+        price: "xxx",
+      },
+      {
+        image: "images/prize-3.png",
+        title: "一年",
+        price: "xxx",
+      },
+    ];
+    const prizesContent = document.getElementById("prizes-content");
+    if (prizesContent) {
+      Prizes.forEach((prize) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <div class="prizes-item">
+            <div class="image-wrapper">
+              <img src="${prize.image}" alt="${prize.title}" />
+              <div class="prizes-deco"></div>
+            </div>
+            <div class="prizes-item-content">
+              <h3>進階版<br><span>${prize.title}</span></h3>
+              <p>價值<span>${prize.price}</span>元</p>
+            </div>
+         
+          </div>
+        `;
+        prizesContent.appendChild(div);
+      });
+    }
+    /* 抽獎步驟 */
+    const Steps = [
+      {
+        image: "images/step-1.png",
+        title: "步驟一",
+        description: "掃描店內QR Code進入此專屬頁面",
+      },
+      {
+        image: "images/step-2.png",
+        title: "步驟二",
+        description: "點擊/掃CODE下載Whoscall App（iOS/Android）",
+      },
+      {
+        image: "images/step-1.png",
+        title: "步驟三",
+        description: "點擊/掃CODE登記抽獎",
+      },
+      {
+        image: "images/step-2.png",
+        title: "步驟四",
+        description: "即贏進階版",
+      },
+    ];
+    const stepsContent = document.getElementById("steps-content");
+    if (stepsContent) {
+      Steps.forEach((step) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+        <div class="step-item">
+          <div class="image-wrapper">
+            <img src="${step.image}" alt="${step.title}" />
+          </div>
+          <div class="step-text-wrapper">
+            <h3>${step.title}</h3>
+            <p>${step.description}</p>
+          </div>
+        </div>
+        `;
+        stepsContent.appendChild(div);
+      });
+    }
+  </script>
 </html>

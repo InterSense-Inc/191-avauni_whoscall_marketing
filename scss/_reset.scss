@@ -27,6 +27,9 @@ body {
     /*中文*/ "Noto Sans HK", sans-serif;
     font-optical-sizing: auto; 
     line-height: 1.5;
+    letter-spacing: 0.1em;
+    background-color: $light;
+    color: $deep;
 }
 /* 重置標題字重 */
 h1, h2, h3, h4, h5, h6 {
@@ -58,7 +61,8 @@ a {
     width: 15px; //水平捲軸按鈕寬
 }
 ::-webkit-scrollbar-thumb { //捲軸手柄
-    background-color: $primary-normal;
+    background: linear-gradient(to bottom right, #58dc00 0%, #80d0ff 100%);
+    border-radius: 10px;
 }
 ::-webkit-scrollbar-track { //滾動條的軌道
     background-color: $light;

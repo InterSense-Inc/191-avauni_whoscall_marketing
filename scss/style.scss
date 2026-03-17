@@ -4,8 +4,9 @@
 
 main {}
 
+
 .container {
-  @include section-container(1280px);
+  @include section-container(1500px);
 }
 
 header {
@@ -14,6 +15,7 @@ header {
   left: 0;
   width: 100%;
   z-index: 100;
+  background-color: rgba(255, 255, 255, 0.5);
 
   .header-content {
     max-width: 1280px;
@@ -44,13 +46,14 @@ nav {
         transition: all 0.3s;
 
         &:hover {
-          color: $primary-normal;
+          color: $secondary-normal;
         }
       }
     }
   }
 }
 
+/* HERO */
 #hero {
   @include section-base;
   background-image: url('../images/banner2.png');
@@ -65,6 +68,7 @@ nav {
     justify-content: flex-end;
     align-items: center;
     min-height: 600px;
+    padding-top: 44px;
   }
 
   .hero-content {
@@ -73,7 +77,7 @@ nav {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
+    gap: 40px;
 
   }
 
@@ -82,7 +86,6 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
     width: auto;
 
 
@@ -113,19 +116,72 @@ nav {
     gap: 20px;
     width: auto;
 
+    .qr-code-badge {
+      font-size: 24px;
+      font-weight: 700;
+      color: $light;
+      background: radial-gradient(circle, $gold, transparent 80%);
+      padding: 5px 100px;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100%;
+        height: 1.5px;
+        background: radial-gradient(circle, #fff8eb, #dc8f0046 40%, transparent 90%);
+        transform: translateX(-50%);
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 100%;
+        height: 1.5px;
+        background: radial-gradient(circle, #fff8eb, $gold 40%, transparent 90%);
+        transform: translateX(-50%);
+      }
+    }
+
     ul {
       display: flex;
+      gap: 20px;
 
       li {
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 10px;
 
-        img {
-          width: 40px;
-          height: 40px;
+        .icon-wrapper {
+          width: 100px;
+          height: 100px;
+          padding: 10px;
+          border: 2px solid $gold;
+          border-radius: 10px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(255, 255, 255, 0.1);
         }
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .feature-text-wrapper {
+        display: inline-block;
+        text-wrap: nowrap;
+        font-size: 14px;
+        color: $light;
       }
     }
   }
@@ -146,12 +202,13 @@ nav {
       font-size: 16px;
       font-weight: 600;
       transition: all 0.3s;
-      border: 2px solid #c57f3d;
+      border: 2px solid $gold;
       line-height: 1.2;
 
       &:hover {
-        background-color: $primary-normal;
+        background-color: lighten(#1d1008, 10%);
         color: $light;
+        transform: translateY(-2px);
       }
 
       .link-icon {
@@ -187,10 +244,229 @@ nav {
     border: 1px solid #ffffff;
     border-radius: 10px;
     overflow: hidden;
+    padding: 10px;
 
     img {
       width: 100%;
       height: 100%;
+    }
+  }
+}
+
+/* 獎品詳情 */
+#prizes {
+  @include section-base;
+  position: relative;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $light;
+  gap: 60px;
+
+  .section-header {
+    @include section-header;
+    z-index: 1;
+
+    h2 {
+      background: linear-gradient(to right, #72ffa4 0%, #c6b0ff 80%);
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+  }
+
+  #prizes-content {
+    @include section-container(1500px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    .prizes-item {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      gap: 20px;
+
+
+    }
+
+    .image-wrapper {
+      flex: 5;
+      position: relative;
+
+      img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .prizes-deco {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(to bottom right, #a4e9c8 0%, #ccecff 100%);
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+        z-index: 0;
+      }
+    }
+
+    .prizes-item-content {
+      display: flex;
+      flex-direction: column;
+      flex: 3;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 10px;
+
+      h3 {
+        font-size: 32px;
+        font-weight: 700;
+        color: $deep;
+      }
+
+      p {
+        font-size: 16px;
+        font-weight: 400;
+        color: $deep;
+      }
+
+    }
+
+  }
+}
+
+/* 抽獎步驟 */
+#steps {
+  @include section-base;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, $primary-light-2 0%, $light 60%);
+  gap: 60px;
+
+  .section-header {
+    @include section-header;
+    z-index: 1;
+    align-items: flex-end;
+
+    h2 {
+      background: linear-gradient(to right, #ffffff 0%, #ffffff 80%);
+      color: transparent;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;;
+    }
+  }
+
+  #steps-content {
+    @include section-container(1500px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+
+    .step-item {
+      position: relative;
+      flex: 1;
+    }
+
+    .image-wrapper {
+      position: relative;
+
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .step-text-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    gap: 10px;
+    padding-top: 150px;
+    min-height: 300px;
+    background: linear-gradient(to bottom, rgba($light, 0) 5%, $light 40%);
+
+    h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: $primary-dark;
+      border-bottom: 3px solid $primary-light;
+      padding-bottom: 4px;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 400;
+      color: $deep;
+    }
+  }
+}
+
+#CTA-section {
+  @include section-base;
+  min-height: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('../images/CTA-bg.png') no-repeat center bottom;
+  background-size: cover;
+
+  #CTA-content {
+    @include section-container(900px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+
+    .CTA-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    h2 {
+      font-size: 48px;
+      font-weight: 700;
+      color: $light;
+      padding-bottom: 4px;
+    }
+
+    p {
+      font-size: 20px;
+      font-weight: 400;
+      color: $primary-light;
+    }
+  }
+
+  .CTA-content-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .CTA-button {
+      @include section-button;
     }
   }
 }
