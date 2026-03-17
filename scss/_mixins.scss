@@ -3,6 +3,16 @@
 // 使用 container-name: mobile-preview 的父層會觸發對應的 container query
 
 // XL: 1280px 以下
+@mixin rwd-2xl {
+  @media screen and (max-width: 1536px) {
+    @content;
+  }
+
+  @container mobile-preview (max-width: 1536px) {
+    @content;
+  }
+}
+
 @mixin rwd-xl {
   @media screen and (max-width: 1280px) {
     @content;
@@ -85,6 +95,7 @@
 @mixin section-base {
   width: 100%;
   padding: 100px 32px;
+  overflow: hidden;
 
   @include rwd-xl {
     padding: 80px 32px;
@@ -93,6 +104,7 @@
   @include rwd-lg {
     padding: 60px 32px;
   }
+
   @include rwd-md {
     padding: 30px 24px;
   }
@@ -112,6 +124,7 @@
   @include rwd-lg {
     padding: 0 16px;
   }
+
   @include rwd-md {
     padding: 0 8px;
   }
@@ -126,15 +139,29 @@
   width: 100%;
   gap: 20px;
   max-width: 1500px;
+  position: relative;
 
-  top: 100px;
-  left: 150px;
+  @include rwd-lg {
+    align-items: center;
+  }
+
+
+
   h2 {
     font-size: 100px;
     font-weight: 700;
-  }
-  @include rwd-md {
-    font-size: 28px;
+
+    @include rwd-lg {
+      font-size: 80px;
+    }
+
+    @include rwd-md {
+      font-size: 60px;
+    }
+
+    @include rwd-sm {
+      font-size: 60px;
+    }
   }
 }
 
@@ -154,6 +181,7 @@
   font-size: 20px;
   color: $text-muted;
   line-height: 1.6;
+
   @include rwd-md {
     font-size: 18px;
   }
@@ -190,6 +218,7 @@
 
   h1 {
     font-size: 40px;
+
     @include rwd-lg {
       font-size: 32px;
     }
@@ -197,6 +226,7 @@
 
   h2 {
     font-size: 32px;
+
     @include rwd-lg {
       font-size: 28px;
     }

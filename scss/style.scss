@@ -9,16 +9,58 @@ main {}
   @include section-container(1500px);
 }
 
+// header
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba($primary-light, 0.8);
+
+
+
+  .hamburger {
+    background-color: transparent;
+    border: none;
+    display: none;
+
+    @include rwd-lg {
+      display: block;
+    }
+
+    .bar {
+      display: block;
+      width: 24px;
+      height: 3px;
+      background-color: $light;
+      margin: 5px auto;
+      transition: .4s;
+
+    }
+
+    &.is-active {
+      .bar {
+        background-color: $deep;
+
+        &:nth-child(1) {
+          transform: rotate(45deg) translateY(6px) translateX(5px);
+        }
+
+        &:nth-child(2) {
+          opacity: 0;
+        }
+
+        &:nth-child(3) {
+          transform: rotate(-45deg) translateY(-6px) translateX(5px);
+        }
+      }
+    }
+  }
+
 
   .header-content {
-    max-width: 1280px;
+    max-width: 1500px;
     width: 100%;
     margin: 0 auto;
     padding: 0 32px;
@@ -26,6 +68,57 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+    position: relative;
+
+    @include rwd-lg {
+      padding: 16px 24px;
+    }
+
+    @include rwd-sm {
+      padding: 12px 16px;
+    }
+  }
+
+  .logo-group {
+    display: flex;
+    align-items: center;
+    color: $light;
+    font-size: 20px;
+    margin-top: 4px;
+
+    span {
+      font-size: 20px;
+      font-weight: 300;
+      color: $light;
+      margin-left: 8px;
+      margin-bottom: 4px;
+
+      @include rwd-lg {
+        font-size: 16px;
+        margin-left: 6px;
+      }
+
+      @include rwd-sm {
+        font-size: 14px;
+        margin-left: 4px;
+      }
+    }
+
+    img {
+      height: 40px;
+    }
+
+    @include rwd-md {
+      img {
+        height: 30px;
+      }
+    }
+
+    @include rwd-sm {
+      img {
+        height: 24px;
+      }
+    }
   }
 }
 
@@ -33,23 +126,110 @@ nav {
   display: flex;
   gap: 20px;
 
-  ul {
+
+  @include rwd-lg {
+    display: none;
+    animation: hide 0.35s both;
+
+    &.show {
+      display: block;
+    }
+  }
+
+  &.show {
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    background-color: $light;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    animation: show 0.35s both;
+    height: 100dvh;
+
+    .nav-list li a {
+      color: $deep;
+
+      &:hover {
+        color: $primary-normal;
+      }
+    }
+  }
+
+  .nav-list {
     display: flex;
     gap: 20px;
 
+
+    @include rwd-lg {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      max-height: 80dvh;
+      padding: 100px 0;
+    }
+
     li {
+      @include rwd-lg {
+        width: 100%;
+      }
+
       a {
-        color: $deep;
-        font-size: 16px;
+        color: $light;
+        font-size: 18px;
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s;
+
+        @include rwd-lg {
+          position: relative;
+          display: inline-block;
+          font-size: 24px;
+          border-bottom: 1px solid $primary-light;
+          padding: 20px 40px;
+          width: 100%;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            width: 100%;
+            height: 1px;
+            background-color: $primary-normal;
+            height: 8px;
+            width: 8px;
+            transform: translateY(-50%) rotate(45deg);
+
+          }
+        }
 
         &:hover {
           color: $secondary-normal;
         }
       }
     }
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }
 
@@ -61,14 +241,33 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   font-family: 'Comfortaa', 'Kosugi Maru', sans-serif;
+  border-radius:  0 0 100px 100px;
+  overflow: hidden;
+  @include rwd-xl {
+    border-radius: 0;
+  }
+  @include rwd-md {
+    background-position: 80% center;
+  }
 
   .hero-container {
-    @include section-container(1280px);
+    @include section-container(1500px);
     display: flex;
     justify-content: flex-end;
     align-items: center;
     min-height: 600px;
-    padding-top: 44px;
+    padding-top: 60px;
+
+    @include rwd-md {
+      justify-content: center;
+      min-height: 500px;
+      padding-top: 80px;
+    }
+
+    @include rwd-sm {
+      min-height: 450px;
+      gap: 24px;
+    }
   }
 
   .hero-content {
@@ -77,8 +276,15 @@ nav {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    gap: 40px;
+    gap: 20px;
 
+    @include rwd-md {
+      gap: 24px;
+    }
+
+    @include rwd-sm {
+      gap: 20px;
+    }
   }
 
   .hero-content-text {
@@ -87,6 +293,7 @@ nav {
     align-items: center;
     justify-content: center;
     width: auto;
+    line-height: 1.2;
 
 
     h1 {
@@ -98,6 +305,14 @@ nav {
       background-clip: text;
       text-fill-color: transparent;
       filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+
+      @include rwd-lg {
+        font-size: 36px;
+      }
+
+      @include rwd-md {
+        font-size: 28px;
+      }
     }
 
     h2 {
@@ -105,6 +320,18 @@ nav {
       filter: drop-shadow(0 0 10px rgba(255, 179, 72, 0.8));
       font-weight: 700;
       color: #ffffff;
+
+      @include rwd-lg {
+        font-size: 56px;
+      }
+
+      @include rwd-md {
+        font-size: 48px;
+      }
+
+      @include rwd-sm {
+        font-size: 36px;
+      }
     }
   }
 
@@ -117,12 +344,22 @@ nav {
     width: auto;
 
     .qr-code-badge {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       color: $light;
       background: radial-gradient(circle, $gold, transparent 80%);
       padding: 5px 100px;
       position: relative;
+
+      @include rwd-md {
+        font-size: 16px;
+        padding: 5px 60px;
+      }
+
+      @include rwd-sm {
+        font-size: 16px;
+        padding: 5px 40px;
+      }
 
       &::before {
         content: '';
@@ -151,6 +388,16 @@ nav {
       display: flex;
       gap: 20px;
 
+      @include rwd-md {
+        gap: 16px;
+      }
+
+      @include rwd-sm {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+      }
+
       li {
         flex: 1;
         display: flex;
@@ -158,9 +405,13 @@ nav {
         align-items: center;
         gap: 10px;
 
+        @include rwd-sm {
+          flex: 1 ;
+        }
+
         .icon-wrapper {
-          width: 100px;
-          height: 100px;
+          width: 80px;
+          height: 80px;
           padding: 10px;
           border: 2px solid $gold;
           border-radius: 10px;
@@ -169,6 +420,12 @@ nav {
           align-items: center;
           justify-content: center;
           background-color: rgba(255, 255, 255, 0.1);
+
+          @include rwd-md {
+            width: 80px;
+            height: 80px;
+          }
+
         }
 
         img {
@@ -182,6 +439,17 @@ nav {
         text-wrap: nowrap;
         font-size: 14px;
         color: $light;
+
+        @include rwd-md {
+          text-wrap: wrap;
+          font-size: 13px;
+          text-align: center;
+        }
+
+        @include rwd-sm {
+          font-size: 12px;
+          text-wrap: balance;
+        }
       }
     }
   }
@@ -190,6 +458,14 @@ nav {
     display: inline-flex;
     gap: 20px;
     width: auto;
+    margin-top: 20px;
+    @include rwd-md {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+
 
     .download-link {
       display: flex;
@@ -205,6 +481,17 @@ nav {
       border: 2px solid $gold;
       line-height: 1.2;
 
+      @include rwd-md {
+        padding: 12px 24px;
+        justify-content: center;
+      }
+
+      @include rwd-sm {
+        padding: 12px 16px;
+        font-size: 14px;
+        gap: 2px;
+      }
+
       &:hover {
         background-color: lighten(#1d1008, 10%);
         color: $light;
@@ -218,6 +505,9 @@ nav {
           height: 24px;
           width: 24px;
 
+          @include rwd-sm {
+            font-size: 20px;
+          }
         }
       }
 
@@ -227,13 +517,21 @@ nav {
       }
 
       .link-text-top {
-        font-size: 12px;
+        font-size: 9px;
         color: $light;
+
+        @include rwd-sm {
+          font-size: 8px;
+        }
       }
 
       .link-text-bottom {
         font-size: 16px;
         color: $light;
+
+        @include rwd-sm {
+          font-size: 12px;
+        }
       }
     }
   }
@@ -262,12 +560,57 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: $light;
+  background: url('../images/bg-line.jpg') no-repeat center bottom;
   gap: 60px;
+
+  @include rwd-md {
+    min-height: auto;
+    gap: 40px;
+  }
+
+  @include rwd-sm {
+    gap: 32px;
+  }
 
   .section-header {
     @include section-header;
     z-index: 1;
+    .header-content {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+    }
+    svg {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      @include rwd-md {
+        width: 30px;
+        height: 30px;
+      }
+  
+      // 讓 SVG 顏色可由 CSS 控制（覆寫原本的 fill="white"）
+      path {
+        fill: $primary-light-2;
+      }
+  
+      // 左上角裝飾（第一個 svg）
+      &:first-of-type {
+        top: -20px;
+        left: -40px;
+      }
+  
+      // 右下角裝飾（第二個 svg）
+      &:nth-of-type(2) {
+        top: -20px;
+        left: 0px;
+        
+      }
+  
+    }
 
     h2 {
       background: linear-gradient(to right, #72ffa4 0%, #c6b0ff 80%);
@@ -285,18 +628,33 @@ nav {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 
+    @include rwd-md {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
     .prizes-item {
       display: flex;
       align-items: flex-end;
       justify-content: flex-start;
       gap: 20px;
 
-
+      @include rwd-lg {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
     }
 
     .image-wrapper {
       flex: 5;
       position: relative;
+
+      @include rwd-md {
+        flex: none;
+        width: 100%;
+        max-width: 280px;
+      }
 
       img {
         position: relative;
@@ -315,6 +673,17 @@ nav {
         right: 0;
         transform: translate(50%, -50%);
         z-index: 0;
+        mix-blend-mode: multiply;
+
+        @include rwd-md {
+          width: 120px;
+          height: 120px;
+        }
+
+        @include rwd-sm {
+          width: 80px;
+          height: 80px;
+        }
       }
     }
 
@@ -326,10 +695,34 @@ nav {
       justify-content: flex-start;
       gap: 10px;
 
+      @include rwd-lg {
+        align-items: center;
+      }
+
       h3 {
         font-size: 32px;
         font-weight: 700;
         color: $deep;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        @include rwd-md {
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          font-size: 28px;
+        }
+
+        @include rwd-sm {
+          font-size: 24px;
+        }
+
+        span {
+          color: $gold;
+        }
       }
 
       p {
@@ -353,19 +746,204 @@ nav {
   justify-content: center;
   background: linear-gradient(to bottom, $primary-light-2 0%, $light 60%);
   gap: 60px;
+  position: relative;
+  padding-bottom: 0;
+  border-radius: 100px 100px 0 0;
+
+  @include rwd-xl {
+    border-radius: 50px 50px 0 0;
+  }
+
+  @include rwd-md {
+    border-radius: 0;
+  }
+
+  @include rwd-md {
+    min-height: auto;
+    gap: 40px;
+    background: $primary-light-2;
+    padding-bottom: 40px;
+  }
+
+  @include rwd-sm {
+    gap: 32px;
+  }
+
+  .steps-deco {
+    z-index: 0;
+    opacity: 0.5;
+    width: fit-content;
+    height: fit-content;
+
+    svg {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      fill: $light;
+      transform: translate(-50%, -50%);
+
+      @include rwd-md {
+        width: 200px;
+        height: 200px;
+      }
+
+      @include rwd-sm {
+        width: 120px;
+        height: 120px;
+      }
+    }
+
+    svg:nth-child(1) {
+      top: 30%;
+      left: 15%;
+
+    }
+
+    svg:nth-child(2) {
+      top: 60%;
+      left: 50%;
+      width: 250px;
+      height: 250px;
+
+      @include rwd-md {
+        width: 150px;
+        height: 150px;
+      }
+
+      @include rwd-sm {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    svg:nth-child(3) {
+      top: 40%;
+      left: 80%;
+      transform: rotate(90deg);
+    }
+
+  }
+
+  .steps-deco-block {
+    position: absolute;
+    top: 10%;
+    left: 100px;
+    width: 350px;
+    height: 60px;
+    background: linear-gradient(to left, #b0fcd7 0%, #ccecff 60%);
+    border-radius: 50px;
+
+    @include rwd-md {
+      width: 200px;
+      height: 40px;
+      left: 24px;
+    }
+
+    @include rwd-sm {
+      width: 120px;
+      height: 30px;
+      left: 16px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      right: -50px;
+      width: 200px;
+      height: 20px;
+      background-color: $light;
+      border-radius: 50px;
+      background: linear-gradient(to left, #b0fcd7 0%, #ccecff 60%);
+
+      @include rwd-md {
+        width: 100px;
+        height: 12px;
+      }
+
+      @include rwd-sm {
+        display: none;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: 0;
+      width: 200px;
+      height: 20px;
+    }
+
+    &:nth-child(2) {
+      left: 80%;
+      top: 40%;
+
+      @include rwd-md {
+        left: auto;
+        right: 24px;
+      }
+
+      @include rwd-sm {
+        right: 16px;
+      }
+    }
+  }
 
   .section-header {
     @include section-header;
     z-index: 1;
     align-items: flex-end;
 
+    @include rwd-lg {
+      align-items: center;
+    }
+
+      .header-content {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+      }
+      svg {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+    
+        // 讓 SVG 顏色可由 CSS 控制（覆寫原本的 fill="white"）
+        path {
+          fill: $light;
+        }
+    
+        // 左上角裝飾（第一個 svg）
+        &:first-of-type {
+          top: -20px;
+          right: -40px;
+        }
+    
+        // 右下角裝飾（第二個 svg）
+        &:nth-of-type(2) {
+          top: -20px;
+          right: 0px;
+          
+        }
+    
+        @include rwd-md {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    
     h2 {
       background: linear-gradient(to right, #ffffff 0%, #ffffff 80%);
       color: transparent;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      text-fill-color: transparent;;
+      text-fill-color: transparent;
+
     }
   }
 
@@ -375,6 +953,16 @@ nav {
     grid-template-columns: repeat(4, 1fr);
     gap: 60px;
 
+    @include rwd-lg {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    @include rwd-sm {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
     .step-item {
       position: relative;
       flex: 1;
@@ -383,10 +971,15 @@ nav {
     .image-wrapper {
       position: relative;
 
-
       img {
         width: 100%;
         height: 100%;
+      }
+
+      @include rwd-md {
+        max-height: 500px;
+        overflow: hidden;
+        border-radius: 25px;
       }
     }
   }
@@ -405,6 +998,19 @@ nav {
     padding-top: 150px;
     min-height: 300px;
     background: linear-gradient(to bottom, rgba($light, 0) 5%, $light 40%);
+    border-radius: 0 0 20px 20px;
+
+    @include rwd-md {
+      padding-top: 100px;
+      min-height: 220px;
+      background: linear-gradient(to bottom, rgba($light, 0) 5%, $light 40%);
+
+    }
+
+    @include rwd-sm {
+      padding-top: 80px;
+      min-height: 180px;
+    }
 
     h3 {
       font-size: 24px;
@@ -412,6 +1018,11 @@ nav {
       color: $primary-dark;
       border-bottom: 3px solid $primary-light;
       padding-bottom: 4px;
+
+      @include rwd-md {
+        font-size: 20px;
+      }
+
     }
 
     p {
@@ -430,6 +1041,16 @@ nav {
   justify-content: center;
   background: url('../images/CTA-bg.png') no-repeat center bottom;
   background-size: cover;
+  padding-top: 0;
+
+  @include rwd-2xl {
+    min-height: 600px;
+    background: linear-gradient(to bottom right, #8841eb 0%, #21A2B3 80%, #0DCE6D 100%);
+  }
+
+  @include rwd-sm {
+    min-height: 500px;
+  }
 
   #CTA-content {
     @include section-container(900px);
@@ -438,12 +1059,44 @@ nav {
     align-items: flex-end;
     justify-content: center;
 
+    @include rwd-2xl {
+      position: relative;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    @include rwd-md {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
     .CTA-content-wrapper {
+      position: relative;
+      padding-top: 120px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;
       gap: 30px;
+      z-index: 2;
+
+      @include rwd-2xl {
+        flex: 1;
+      }
+
+      @include rwd-md {
+        padding-top: 80px;
+        align-items: center;
+        text-align: center;
+      }
+
+      @include rwd-sm {
+        padding-top: 60px;
+      }
     }
 
     h2 {
@@ -451,12 +1104,20 @@ nav {
       font-weight: 700;
       color: $light;
       padding-bottom: 4px;
+
+      @include rwd-lg {
+        font-size: 40px;
+      }
     }
 
     p {
       font-size: 20px;
       font-weight: 400;
       color: $primary-light;
+
+      @include rwd-md {
+        font-size: 18px;
+      }
     }
   }
 
@@ -465,8 +1126,45 @@ nav {
     align-items: center;
     justify-content: center;
 
+    @include rwd-md {
+      width: 100%;
+    }
+
     .CTA-button {
       @include section-button;
+
+      @include rwd-lg {
+        font-size: 32px;
+      }
+
+      @include rwd-md {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
     }
+  }
+
+  .gift-image {
+    display: none;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @include rwd-2xl {
+      display: block;
+    position: absolute;
+    width: 500px;
+    right: -100px;
+    bottom: 0;
+    z-index: 1;
+    }
+    @include rwd-md {
+      position: relative;
+    }
+
   }
 }
