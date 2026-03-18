@@ -17,7 +17,7 @@
   <body>
     <header id="header">
       <div class="header-content">
-        <a href="#hero" class="logo-group">
+        <a href="/" class="logo-group">
           <img src="images/whoscall-logo-white.svg" alt="logo" />
           <span>X</span>
           <img src="images/AVAUNI-logo.png" alt="logo" />
@@ -379,5 +379,81 @@
       opacity: 1, // 由透明變成不透明
       transition: "all 600ms ease-out",
     });
+
+    /* 店家id */
+    const GOOGLE_FORM_BASE_URL =
+      "https://docs.google.com/forms/d/e/1FAIpQLSdUoo-WCka_t_U1J6WjKIBakS8Yt6_5v6N5O6n15Tfp6BwzOw/viewform";
+    const GOOGLE_FORM_SHOP_ID_ENTRY = "entry.1218472180";
+
+    function getQueryParamFromSearchOrHash(keys) {
+      const search = window.location.search || "";
+      if (search) {
+        const params = new URLSearchParams(search);
+        for (const key of keys) {
+          const v = params.get(key);
+          if (v) return v.trim();
+        }
+      }
+
+      const hash = window.location.hash || "";
+      const qIndex = hash.indexOf("?");
+      if (qIndex !== -1) {
+        const hashQuery = hash.slice(qIndex + 1);
+        const params = new URLSearchParams(hashQuery);
+        for (const key of keys) {
+          const v = params.get(key);
+          if (v) return v.trim();
+        }
+      }
+
+      return "";
+    }
+
+    function getShopIdFromUrl() {
+      const fromQuery = getQueryParamFromSearchOrHash([
+        "shop_id",
+        "shopId",
+        "id",
+      ]);
+      if (fromQuery) return fromQuery;
+
+      const path = window.location.pathname || "";
+      const segments = path
+        .split("/")
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+      if (segments.length === 0) return "";
+
+      const last = segments[segments.length - 1];
+      if (last.toLowerCase() === "index.html" && segments.length >= 2) {
+        return segments[segments.length - 2];
+      }
+
+      return last;
+    }
+
+    const shopId = getShopIdFromUrl();
+
+    const ctaLink = document.querySelector("a.CTA-button");
+    if (ctaLink) {
+      function buildGoogleFormUrl() {
+        const currentShopId = getShopIdFromUrl();
+        const url = new URL(GOOGLE_FORM_BASE_URL);
+        url.searchParams.set("usp", "pp_url");
+        if (currentShopId) {
+          url.searchParams.set(GOOGLE_FORM_SHOP_ID_ENTRY, currentShopId);
+        }
+        return url.toString();
+      }
+
+      ctaLink.href = buildGoogleFormUrl();
+      ctaLink.target = "_blank";
+      ctaLink.rel = "noopener noreferrer";
+
+      ctaLink.addEventListener("click", () => {
+        ctaLink.href = buildGoogleFormUrl();
+      });
+    }
   </script>
 </html>
