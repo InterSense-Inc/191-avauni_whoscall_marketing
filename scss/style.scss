@@ -236,7 +236,7 @@ nav {
 /* HERO */
 #hero {
   @include section-base;
-  background-image: url('../images/banner2.png');
+  background-image: url('../images/banner5.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -247,7 +247,8 @@ nav {
     border-radius: 0;
   }
   @include rwd-md {
-    background-position: 80% center;
+    background-image: url('../images/banner6.png');
+    background-position: ceter center;
   }
 
   .hero-container {
@@ -562,6 +563,7 @@ nav {
   justify-content: center;
   background: url('../images/bg-line.jpg') no-repeat center bottom;
   gap: 60px;
+  padding-top: 80px;
 
   @include rwd-md {
     min-height: auto;

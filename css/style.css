@@ -439,7 +439,7 @@ nav .nav-list li a:hover {
   }
 }
 #hero {
-  background-image: url("../images/banner2.png");
+  background-image: url("../images/banner5.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -459,12 +459,14 @@ nav .nav-list li a:hover {
 }
 @media screen and (max-width: 768px) {
   #hero {
-    background-position: 80% center;
+    background-image: url("../images/banner6.png");
+    background-position: ceter center;
   }
 }
 @container mobile-preview (max-width: 768px) {
   #hero {
-    background-position: 80% center;
+    background-image: url("../images/banner6.png");
+    background-position: ceter center;
   }
 }
 #hero .hero-container {
@@ -976,6 +978,7 @@ nav .nav-list li a:hover {
   justify-content: center;
   background: url("../images/bg-line.jpg") no-repeat center bottom;
   gap: 60px;
+  padding-top: 80px;
 }
 @media screen and (max-width: 768px) {
   #prizes {
