@@ -1878,7 +1878,7 @@ nav .nav-list li a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("../images/CTA-bg.png") no-repeat center bottom;
+  background: url("../images/cta-bg.png") no-repeat center bottom;
   background-size: cover;
   padding-top: 0;
 }
