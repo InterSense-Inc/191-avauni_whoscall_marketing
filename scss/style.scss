@@ -293,7 +293,7 @@ nav {
     align-items: center;
     justify-content: center;
     width: auto;
-    line-height: 1.2;
+    line-height: 1.5;
 
 
     h1 {
@@ -304,7 +304,7 @@ nav {
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-fill-color: transparent;
-      filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.5));
+      filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.2));
 
       @include rwd-lg {
         font-size: 36px;
@@ -317,7 +317,7 @@ nav {
 
     h2 {
       font-size: 72px;
-      filter: drop-shadow(0 0 10px rgba(255, 179, 72, 0.8));
+      filter: drop-shadow(0 0 10px rgba(72, 231, 255, 0.8));
       font-weight: 700;
       color: #ffffff;
 
@@ -345,9 +345,9 @@ nav {
 
     .qr-code-badge {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 500;
       color: $light;
-      background: radial-gradient(circle, $gold, transparent 80%);
+      background: radial-gradient(circle, #0eb0a2, transparent 80%);
       padding: 5px 100px;
       position: relative;
 
@@ -368,7 +368,7 @@ nav {
         left: 50%;
         width: 100%;
         height: 1.5px;
-        background: radial-gradient(circle, #fff8eb, #dc8f0046 40%, transparent 90%);
+        background: radial-gradient(circle, #fff8eb,$gold 40%, transparent 90%);
         transform: translateX(-50%);
       }
 
@@ -413,7 +413,7 @@ nav {
           width: 80px;
           height: 80px;
           padding: 10px;
-          border: 2px solid $gold;
+          border: 2px solid $light;
           border-radius: 10px;
           overflow: hidden;
           display: flex;
@@ -566,6 +566,7 @@ nav {
   @include rwd-md {
     min-height: auto;
     gap: 40px;
+    padding-top: 80px;
   }
 
   @include rwd-sm {
