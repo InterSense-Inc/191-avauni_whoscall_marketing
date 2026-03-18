@@ -460,13 +460,13 @@ nav .nav-list li a:hover {
 @media screen and (max-width: 768px) {
   #hero {
     background-image: url("../images/banner6.png");
-    background-position: ceter center;
+    background-position: center center;
   }
 }
 @container mobile-preview (max-width: 768px) {
   #hero {
     background-image: url("../images/banner6.png");
-    background-position: ceter center;
+    background-position: center center;
   }
 }
 #hero .hero-container {
@@ -606,7 +606,7 @@ nav .nav-list li a:hover {
 }
 #hero .hero-content-text h2 {
   font-size: 72px;
-  filter: drop-shadow(0 0 10px rgba(72, 231, 255, 0.8));
+  filter: drop-shadow(0 0 10px rgba(207, 122, 25, 0.8));
   font-weight: 700;
   color: #ffffff;
 }
@@ -622,11 +622,13 @@ nav .nav-list li a:hover {
 }
 @media screen and (max-width: 768px) {
   #hero .hero-content-text h2 {
+    filter: drop-shadow(0 0 10px rgba(207, 122, 25, 0.8));
     font-size: 48px;
   }
 }
 @container mobile-preview (max-width: 768px) {
   #hero .hero-content-text h2 {
+    filter: drop-shadow(0 0 10px rgba(207, 122, 25, 0.8));
     font-size: 48px;
   }
 }

@@ -248,7 +248,7 @@ nav {
   }
   @include rwd-md {
     background-image: url('../images/banner6.png');
-    background-position: ceter center;
+    background-position: center center;
   }
 
   .hero-container {
@@ -318,7 +318,7 @@ nav {
 
     h2 {
       font-size: 72px;
-      filter: drop-shadow(0 0 10px rgba(72, 231, 255, 0.8));
+      filter: drop-shadow(0 0 10px rgba(207, 122, 25, 0.8));
       font-weight: 700;
       color: #ffffff;
 
@@ -327,6 +327,7 @@ nav {
       }
 
       @include rwd-md {
+        filter: drop-shadow(0 0 10px rgba(207, 122, 25, 0.8));
         font-size: 48px;
       }
 
