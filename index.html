@@ -210,12 +210,12 @@
     /* HERO下載連結按鈕 */
     const DownloadLinks = [
       {
-        icon: "fa-brands fa-google-play",
+        icon: "images/GooglePlay_Badge_English.svg",
         platform: "Google Play",
         href: "https://play.google.com/store/apps/details?id=gogolook.callgogolook2&hl=zh_TW",
       },
       {
-        icon: "fa-brands fa-apple",
+        icon: "images/App_Store_Badge_US.svg",
         platform: "App Store",
         href: "https://apps.apple.com/tw/app/whoscall-%E8%B1%A1%E5%8D%A1%E4%BE%86/id929968679",
       },
@@ -231,13 +231,7 @@
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.innerHTML = `
-          <span class="link-icon">
-            <i class="${link.icon}"></i>
-          </span>
-          <span class="link-text-group">
-            <span class="link-text link-text-top">Get it on</span>
-            <span class="link-text link-text-bottom">${link.platform}</span>
-          </span>
+          <img src=${link.icon} alt=${link.platform} />
         `;
         buttonGroup.appendChild(a);
       });
