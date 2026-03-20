@@ -1844,6 +1844,163 @@ nav .nav-list li a:hover {
   color: #333;
 }
 
+/* 抽獎規則 */
+#rules {
+  width: 100%;
+  padding: 100px 32px;
+  overflow: hidden;
+}
+@media screen and (max-width: 1280px) {
+  #rules {
+    padding: 80px 32px;
+  }
+}
+@container mobile-preview (max-width: 1280px) {
+  #rules {
+    padding: 80px 32px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  #rules {
+    padding: 60px 32px;
+  }
+}
+@container mobile-preview (max-width: 1024px) {
+  #rules {
+    padding: 60px 32px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #rules {
+    padding: 30px 24px;
+  }
+}
+@container mobile-preview (max-width: 768px) {
+  #rules {
+    padding: 30px 24px;
+  }
+}
+#rules {
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#rules #rules-content {
+  max-width: 1500px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+@media screen and (max-width: 1280px) {
+  #rules #rules-content {
+    padding: 0 24px;
+  }
+}
+@container mobile-preview (max-width: 1280px) {
+  #rules #rules-content {
+    padding: 0 24px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  #rules #rules-content {
+    padding: 0 16px;
+  }
+}
+@container mobile-preview (max-width: 1024px) {
+  #rules #rules-content {
+    padding: 0 16px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #rules #rules-content {
+    padding: 0 8px;
+  }
+}
+@container mobile-preview (max-width: 768px) {
+  #rules #rules-content {
+    padding: 0 8px;
+  }
+}
+#rules #rules-content {
+  position: relative;
+  padding: 60px 60px;
+  background: #daede4;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-height: 500px;
+  overflow: hidden;
+  transition: max-height 0.8s ease-in-out;
+  gap: 20px;
+  padding-bottom: 100px;
+}
+#rules .more-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to bottom, #daede4 0%, #ffffff 100%);
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f763c;
+  padding: 20px;
+}
+#rules .more-button i {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f763c;
+  transition: transform 0.3s ease-in-out;
+}
+#rules .more-button:hover i {
+  transform: scale(1.1);
+}
+#rules .more-button:active i {
+  transform: scale(1.1);
+}
+#rules h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #446db0;
+  border-bottom: 3px solid #d2e8c7;
+  padding-bottom: 4px;
+  margin-bottom: 20px;
+}
+#rules p {
+  margin-bottom: 10px;
+}
+#rules ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  width: 100%;
+}
+#rules ul li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.6;
+  text-align: left;
+  width: 100%;
+}
+#rules ul li ul {
+  list-style: number;
+  padding-left: 20px;
+}
+
+/* 抽獎連結 */
 #CTA-section {
   width: 100%;
   padding: 100px 32px;

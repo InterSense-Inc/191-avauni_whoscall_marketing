@@ -241,11 +241,13 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   font-family: 'Comfortaa', 'Kosugi Maru', sans-serif;
-  border-radius:  0 0 100px 100px;
+  border-radius: 0 0 100px 100px;
   overflow: hidden;
+
   @include rwd-xl {
     border-radius: 0;
   }
+
   @include rwd-md {
     background-image: url('../images/banner6.png');
     background-position: ceter center;
@@ -369,7 +371,7 @@ nav {
         left: 50%;
         width: 100%;
         height: 1.5px;
-        background: radial-gradient(circle, #fff8eb,$gold 40%, transparent 90%);
+        background: radial-gradient(circle, #fff8eb, $gold 40%, transparent 90%);
         transform: translateX(-50%);
       }
 
@@ -407,7 +409,7 @@ nav {
         gap: 10px;
 
         @include rwd-sm {
-          flex: 1 ;
+          flex: 1;
         }
 
         .icon-wrapper {
@@ -460,6 +462,7 @@ nav {
     gap: 20px;
     width: auto;
     margin-top: 20px;
+
     @include rwd-md {
       width: 100%;
       justify-content: center;
@@ -579,6 +582,7 @@ nav {
   .section-header {
     @include section-header;
     z-index: 1;
+
     .header-content {
       position: relative;
       width: 100%;
@@ -587,33 +591,35 @@ nav {
       justify-content: center;
       width: fit-content;
     }
+
     svg {
       position: absolute;
       width: 40px;
       height: 40px;
+
       @include rwd-md {
         width: 30px;
         height: 30px;
       }
-  
+
       // 讓 SVG 顏色可由 CSS 控制（覆寫原本的 fill="white"）
       path {
         fill: $primary-light-2;
       }
-  
+
       // 左上角裝飾（第一個 svg）
       &:first-of-type {
         top: -20px;
         left: -40px;
       }
-  
+
       // 右下角裝飾（第二個 svg）
       &:nth-of-type(2) {
         top: -20px;
         left: 0px;
-        
+
       }
-  
+
     }
 
     h2 {
@@ -903,43 +909,44 @@ nav {
       align-items: center;
     }
 
-      .header-content {
-        position: relative;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: fit-content;
+    .header-content {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+    }
+
+    svg {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+
+      // 讓 SVG 顏色可由 CSS 控制（覆寫原本的 fill="white"）
+      path {
+        fill: $light;
       }
-      svg {
-        position: absolute;
-        width: 40px;
-        height: 40px;
-    
-        // 讓 SVG 顏色可由 CSS 控制（覆寫原本的 fill="white"）
-        path {
-          fill: $light;
-        }
-    
-        // 左上角裝飾（第一個 svg）
-        &:first-of-type {
-          top: -20px;
-          right: -40px;
-        }
-    
-        // 右下角裝飾（第二個 svg）
-        &:nth-of-type(2) {
-          top: -20px;
-          right: 0px;
-          
-        }
-    
-        @include rwd-md {
-          width: 30px;
-          height: 30px;
-        }
+
+      // 左上角裝飾（第一個 svg）
+      &:first-of-type {
+        top: -20px;
+        right: -40px;
       }
-    
+
+      // 右下角裝飾（第二個 svg）
+      &:nth-of-type(2) {
+        top: -20px;
+        right: 0px;
+
+      }
+
+      @include rwd-md {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
     h2 {
       background: linear-gradient(to right, #ffffff 0%, #ffffff 80%);
       color: transparent;
@@ -1037,6 +1044,113 @@ nav {
   }
 }
 
+/* 抽獎規則 */
+#rules {
+  @include section-base;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  #rules-content {
+    @include section-container(1500px);
+    position: relative;
+    padding: 60px 60px;
+    background: #daede4;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.8s ease-in-out;
+    gap: 20px;
+    padding-bottom: 100px;
+  }
+
+  .more-button {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #daede4 0%, #ffffff 100%);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: $primary-dark;
+    padding: 20px;
+    i{
+      font-size: 20px;
+      font-weight: 700;
+      color: $primary-dark;
+      transition: transform 0.3s ease-in-out;
+    }
+   
+
+    &:hover {
+      i {
+        transform: scale(1.1);
+      }
+    }
+
+    &:active {
+      i {
+        transform: scale(1.1);
+      }
+    }
+
+    &:focus {}
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: $secondary-normal;
+    border-bottom: 3px solid $primary-light;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    width: 100%;
+
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-weight: 400;
+      color: $deep;
+      line-height: 1.6;
+      text-align: left;
+      width: 100%;
+
+      ul {
+        list-style: number;
+        padding-left: 20px;
+      }
+    }
+
+  }
+
+}
+
+
+/* 抽獎連結 */
 #CTA-section {
   @include section-base;
   min-height: 800px;
@@ -1160,12 +1274,13 @@ nav {
 
     @include rwd-2xl {
       display: block;
-    position: absolute;
-    width: 500px;
-    right: -100px;
-    bottom: 0;
-    z-index: 1;
+      position: absolute;
+      width: 500px;
+      right: -100px;
+      bottom: 0;
+      z-index: 1;
     }
+
     @include rwd-md {
       position: relative;
     }
