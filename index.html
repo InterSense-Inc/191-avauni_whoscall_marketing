@@ -27,13 +27,13 @@
           <ul class="nav-list">
             <li><a href="#prizes">獎品詳情</a></li>
             <li><a href="#steps">抽獎步驟</a></li>
+            <li><a href="#rules">活動辦法</a></li>
             <li><a href="#CTA-section">抽獎連結</a></li>
             <li>
               <a
                 href="https://play.google.com/store/apps/details?id=gogolook.callgogolook2&hl=zh_TW"
                 target="_blank"
-                >下載 Whoscall</a
-              >
+                >下載 Whoscall</a>
             </li>
           </ul>
         </nav>
@@ -181,6 +181,85 @@
         </div>
         <div id="steps-content">
           <!-- 由 JS 依 Steps 動態渲染 -->
+        </div>
+      </section>
+      <section id="rules">
+        <h2>※ 活動辦法及注意事項：</h2>
+        <div id="rules-content">
+          <ul>
+            <li>
+              <strong>活動期間：</strong>2026/03/01 00:00 至 2026/09/30 23:59
+              止。
+            </li>
+            <li>
+              <p><strong>活動參加方式：</strong></p>
+              <p>
+                活動期間內，下載並安裝 Whoscall
+                App，完成指定任務（如註冊、登入或輸入活動序號等），即可獲得抽獎資格乙次。
+              </p>
+            </li>
+            <li>
+              <p><strong>獎項內容：</strong></p>
+              <p>本活動獎項為 Whoscall 進階版服務，包含：</p>
+              <ul>
+                <li>Whoscall 進階版一年</li>
+                <li>Whoscall 進階版三個月</li>
+                <li>Whoscall 進階版一個月</li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>抽獎與發放方式：</strong></p>
+              <ul>
+                <li>活動結束後將統一進行抽獎，並於活動頁公告得獎名單。</li>
+                <li>
+                  獎項將以序號或系統自動開通方式發送至得獎者帳號或註冊信箱。
+                </li>
+                <li>得獎者須依通知方式完成領獎程序，逾期視同放棄中獎資格。</li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>獎項使用期限：</strong></p>
+              <ul>
+                <li>
+                  得獎者需於指定期限內完成兌換或啟用，逾期未使用視同放棄。
+                </li>
+                <li>
+                  進階版服務自啟用日起依中獎項目提供相對應期間（1個月／3個月／1年）。
+                </li>
+              </ul>
+            </li>
+            <li>
+              <ul>
+                <li><strong>參加資格：</strong></li>
+                <li>本活動限於活動期間內成功完成指定任務之用戶參加。</li>
+                <li>每一帳號限參加活動一次，中獎資格亦以單一帳號計算。</li>
+                <li>
+                  若發現以不正當方式（如重複註冊、惡意操作等）參加活動，主辦單位有權取消其參加及得獎資格。
+                </li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>注意事項：</strong></p>
+              <ul>
+                <li>本活動獎項不得轉讓、兌換現金或更換其他商品。</li>
+                <li>活動獎項內容與使用規範，依 Whoscall 官方公告為準。</li>
+                <li>
+                  若因不可抗力因素導致活動無法進行，主辦單位保有修改、暫停或終止活動之權利。
+                </li>
+                <li>參加本活動即視為同意本活動所有條款與規範。</li>
+              </ul>
+            </li>
+            <li>
+              <p><strong>其他說明：</strong></p>
+              <p>
+                主辦單位保有最終解釋及調整活動內容之權利，相關變更將公告於活動網站，恕不另行通知。
+              </p>
+            </li>
+          </ul>
+          <button class="more-button">
+          Show More
+            <i class="fa-solid fa-angle-down"></i>
+          </button>
         </div>
       </section>
       <section id="CTA-section" class="smoove">
@@ -346,6 +425,27 @@
         stepsContent.appendChild(div);
       });
     }
+    /* 活動辦法及注意事項 */
+    const showmoreBtn = document.querySelector(".more-button");
+    const rulesContent = document.getElementById("rules-content");
+    let isOpen = false; // 與 CSS 預設的 max-height(500px) 同步
+    const closedMaxHeight = "500px";
+
+    if (showmoreBtn && rulesContent) {
+      const arrowIcon = showmoreBtn.querySelector("i");
+
+      showmoreBtn.addEventListener("click", () => {
+        if (!isOpen) {
+          // 用 scrollHeight 換成「明確的 px」，確保 max-height 可插值動畫
+          rulesContent.style.maxHeight = rulesContent.scrollHeight + "px";
+          if (arrowIcon) arrowIcon.style.transform = "rotate(180deg)";
+        } else {
+          rulesContent.style.maxHeight = closedMaxHeight;
+          if (arrowIcon) arrowIcon.style.transform = "rotate(0deg)";
+        }
+        isOpen = !isOpen;
+      });
+    }
 
     /* hamburger */
     const hamburger = document.querySelector(".hamburger");
@@ -356,11 +456,25 @@
     });
 
     /* 導覽列錨點平滑滾動 */
-    $(".nav-list a").click(function () {
+    $(".nav-list a").click(function (e) {
       // 取得屬性值
       let btn = $(this).attr("href");
+      if (!btn || btn === "#") return;
+
+      const isHashLink = btn.startsWith("#");
+
+      // 手機版點擊錨點後收起導覽列
+      if (hamburger && nav) {
+        hamburger.classList.remove("is-active");
+        nav.classList.remove("show");
+      }
+
+      // 只有 hash 錨點需要做平滑捲動；外部網址要讓瀏覽器正常跳轉
+      if (!isHashLink) return;
+      e.preventDefault();
       // 取得相對座標位置
       let pos = $(btn).offset();
+      if (!pos) return;
 
       // 捲動至相對座標位置
       $("html,body").animate({ scrollTop: pos.top }, 1000);
